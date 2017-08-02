@@ -20,9 +20,20 @@ public class MainActivity extends AppCompatActivity {
     public int countdownNum;
     public SectorProgressView spv;
 
-    public int userNum = 45;
-    public int timerPercent = 100/userNum;
-    public int progress = 0;
+    public int userNum = 1000;
+    public double timerPercent = (double)100/(double)userNum;
+    public double progress = 0;
+    public long muf;
+    public long suf;
+
+    /*
+    ToDo: Align layout correctly
+    ToDo: Add Start button, move code to onClickListener(). Remove code form onCreate()
+    ToDo: Add Task Completed, Task Not Completed buttons to onFinish()
+    ToDo: Create a tracker to keep tasks recorded.
+    ToDo: Decide whether the timer will be in intervals of 5, or to fix progress wheel not finishing if stopping on number not multiple of 5
+    ToDo: Set Top-Left reading to HH:MM:SS, then MM:SS, then SS.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +46,25 @@ public class MainActivity extends AppCompatActivity {
 
         //Create Countdown Timer Object that runs for 45 seconds (45,000 Milliseconds)
         //For some reason, the timer stops at 43. Adding 2000 milliseconds resolves this issue.
-        new CountDownTimer(47000, 1000) {
-            public void onTick(long millisecondsUntilFinished) {
-                countdownText.setText(String.valueOf(countdownNum));
+        new CountDownTimer(((userNum*1000)+1000), 1000) {
+            public void onTick(long millisUntilFinished) {
+                muf = millisUntilFinished;
+                suf = muf/1000;
+                //Set top-left number to Milliseconds until finished / 1000, to show seconds until finished
+                //countdownText.setText(String.valueOf(suf));
                 countdownNum++;
-                spv.setPercent(progress);
+                spv.setPercent((float)progress);
                 progress = progress+timerPercent;
+
+                countdownText.setText(""+suf);
+
             }
 
             public void onFinish() {
-
+                spv.setPercent((float)progress);
+                countdownText.setText("Time's up!");
             }
+
         }.start();
     }//End of onCreate Method
-
-    public int timerToPercent(int userNum){
-        //100 / countdownNum = percentage
-        int percent = 100/countdownNum;
-        return percent;
-    }
 }//End of MainActivity
