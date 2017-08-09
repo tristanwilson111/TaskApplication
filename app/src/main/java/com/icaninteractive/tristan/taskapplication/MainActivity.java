@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public int countdownNum;
     public SectorProgressView spv;
 
-    public int userNum = 1000;
+    public int userNum = 45;
     public double timerPercent = (double)100/(double)userNum;
     public double progress = 0;
     public long muf;
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     ToDo: Create a tracker to keep tasks recorded.
     ToDo: Decide whether the timer will be in intervals of 5, or to fix progress wheel not finishing if stopping on number not multiple of 5
     ToDo: Set Top-Left reading to HH:MM:SS, then MM:SS, then SS.
+    ToDo: Save the user-set variables in a SQLite database
      */
 
     @Override
@@ -51,20 +52,17 @@ public class MainActivity extends AppCompatActivity {
                 muf = millisUntilFinished;
                 suf = muf/1000;
                 //Set top-left number to Milliseconds until finished / 1000, to show seconds until finished
-                //countdownText.setText(String.valueOf(suf));
                 countdownNum++;
                 spv.setPercent((float)progress);
                 progress = progress+timerPercent;
 
-                countdownText.setText(""+suf);
+                countdownText.setText(suf+"s");
 
             }
-
             public void onFinish() {
                 spv.setPercent((float)progress);
                 countdownText.setText("Time's up!");
             }
-
         }.start();
     }//End of onCreate Method
 }//End of MainActivity
