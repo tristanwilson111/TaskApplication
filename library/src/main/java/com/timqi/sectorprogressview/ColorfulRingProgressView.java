@@ -14,7 +14,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
-
 public class ColorfulRingProgressView extends View {
 
 
