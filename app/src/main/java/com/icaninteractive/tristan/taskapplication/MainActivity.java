@@ -1,5 +1,8 @@
 package com.icaninteractive.tristan.taskapplication;
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 spv.setPercent((float)progress);
                 countdownText.setText("Time's up!");
+                try {
+                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                    Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                    r.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }.start();
     }//End of onCreate Method
