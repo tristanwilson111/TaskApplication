@@ -1,9 +1,11 @@
 package com.icaninteractive.tristan.taskapplication;
 
+import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public long muf;
     public long suf;
 
+
     /*
     ToDo: Align layout correctly
     ToDo: Add Task Completed, Task Not Completed buttons to onFinish()
@@ -46,10 +49,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         final Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(400);
                 //Set the spv object to a new SectorProgressView, linked to our spv id in activity_main.xml
                 spv = (SectorProgressView) findViewById(R.id.spv);
 
@@ -69,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onFinish() {
                         spv.setPercent((float)progress);
                         button.setText("Time's up!");
+                        Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        vib.vibrate(400);
                         try {
                             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
