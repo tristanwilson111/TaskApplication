@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/AppBackground"
     tools:context="com.icaninteractive.tristan.taskapplication.MainActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="80dp">
@@ -51,8 +51,8 @@
             android:id="@+id/spv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:bgColor="#00000000"
-            app:fgColor="#58717171"
+            app:bgColor="@color/ProgressWheelBgColor"
+            app:fgColor="@color/ProgressWheelFgColor"
             app:percent="0" />
 
     </FrameLayout>

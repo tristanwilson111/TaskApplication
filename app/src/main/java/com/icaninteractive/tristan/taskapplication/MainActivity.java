@@ -1,6 +1,7 @@
 package com.icaninteractive.tristan.taskapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -24,21 +25,20 @@ import com.timqi.sectorprogressview.SectorProgressView;
 public class MainActivity extends AppCompatActivity {
 
     //Initialize the countdownNum, SectorProgressView object, countdownText, and the timerToPercent float
-    public int countdownNum;
-    public SectorProgressView spv;
+    private int countdownNum;
+    private SectorProgressView spv;
 
-    public int userNum = 45;
-    public double timerPercent = (double)100/(double)userNum;
-    public double progress = 0;
-    public long muf;
-    public long suf;
+    private int userNum = 45;
+    private double timerPercent = (double)100/(double)userNum;
+    private double progress = 0;
+    private long muf;
+    private long suf;
 
 
     /*
-    ToDo: Align layout correctly
+    ToDo: IMPORTANT: Utilize Implementation/Abstract methods for ProgressWheel, TaskTimer logic to be used on each activity created.
     ToDo: Add Task Completed, Task Not Completed buttons to onFinish()
     ToDo: Create a tracker to keep tasks recorded.
-    ToDo: Decide whether the timer will be in intervals of 5, or to fix progress wheel not finishing if stopping on number not multiple of 5
     ToDo: Set Top-Left reading to HH:MM:SS, then MM:SS, then SS.
     ToDo: Save the user-set variables in a SQLite database
      */
@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        Intent startSecondaryActivity = new Intent(MainActivity.this, SecondaryActivity.class);
+                        startActivity(startSecondaryActivity);
                     }
                 }.start();
             }
